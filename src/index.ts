@@ -23,7 +23,7 @@ class BitField<T extends WordLength> {
             // this.bits.set([+value], bit);
             this.bits[bit] = +value;
             this.value = this.bits.join('') as Word<T>;
-            return this.getBit(bit);
+            return (this.bits[bit] << bit).toString(2);
         } else {
             return null;
         }
