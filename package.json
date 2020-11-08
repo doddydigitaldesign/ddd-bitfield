@@ -1,0 +1,16 @@
+{
+  "name": "ddd-bitfield",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node ./build/index.js",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "Daniel Sonne Lehnberg <doddy@doddy.se> (https://www.doddy.se/)",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.1.0-beta"
+  }
+}
