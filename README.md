@@ -3,13 +3,8 @@ A simple typed bitfield class utilizing the template literal support coming in T
 
 ### Example
 ```typescript
-const flags = new BitField<3>('010');
-console.log(flags.get()); // 010
-flags.setBit(0, 1);
-console.log(flags.get()); // 110
-
-// Implements the iterator protocol
-const [one, two, three] = flags;
-console.log(one, two, three); // 1 1 0
-console.log(flags.toArray(),'-', [...flags]); // [ 1, 1, 0 ] - [ 1, 1, 0 ]
+const flags = new BitField(0b010);
+console.log(flags.get()); // 2
+flags.set(0);
+console.log(flags.get()); // 3
 ```

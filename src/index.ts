@@ -1,48 +1,30 @@
-import { BitFieldType, Word, WordLength } from './types';
 
-class BitField<T extends WordLength> {
-    protected value: BitFieldType<T>;
-    private bits: Uint8Array;
-    constructor(initialValue: BitFieldType<T>)
+class BitField {
+    value: number;
+    constructor(initialValue: number)
     {
-        this.value = initialValue;
-        this.bits = new Uint8Array(initialValue.split('').map(x => +x));
-
+        this.value = initialValue
     }
 
-    public getBit = (bit: number) => {
-        if (bit >= 0 && bit < this.bits.length) {
-            return this.bits[bit];
-        } else {
-            return null;
+    get = (bit?: number) => {
+        if (typeof bit === 'number') {
+            return this.value & (1 << bit);
         }
-    }
-
-    public setBit = (bit: number, value: 0|1|boolean = 1) => {
-        if (bit >= 0 && bit < this.bits.length) {
-            // this.bits.set([+value], bit);
-            this.bits[bit] = +value;
-            this.value = this.bits.join('') as Word<T>;
-            return (this.bits[bit] << bit).toString(2);
-        } else {
-            return null;
-        }
-    }
-
-    public get = () => {
         return this.value;
+        
     }
 
-    public toArray = () => {
-        return [...this];
+    set = (bit: number) => {
+            this.value = (1 << bit) ^ this.value;
+            return this.value;
     }
-
-    *[Symbol.iterator] () {
-        for (const bit of this.bits) {
-            yield bit;
-        }
-    }
-
 }
+
+const flags = new BitField(0b10);
+console.log(flags.get()); // 2
+flags.set(0);
+console.log(flags.get()); // 3
+flags.set(1);
+console.log(flags.get()); // 1
 
 export default BitField;
